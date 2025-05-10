@@ -19,7 +19,6 @@ void decToBin(int dec){
     int n = dec;
     int pow = 1;
     int bin = 0;
-    
     while(n>0){
         int rem  = n%2;
         bin+= rem*pow;
