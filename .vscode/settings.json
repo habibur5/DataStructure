@@ -1,14 +1,11 @@
 {
-    "files.associations": {
-        "*.html": "html",
-        "ostream": "cpp"
-    },
-    "github.copilot.enable": {
-        "*": false,
-        "plaintext": false,
-        "markdown": false,
-        "scminput": false,
-        "python": false,
-        "cpp": false
-    }
+  "cph.general.firstTime": false,
+  "cph.general.useShortCodeForcesName": true,
+  "files.associations": {
+    "*.ejs": "html",
+    "*.html": "html",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "new": "cpp"
+  }
 }
