@@ -58,7 +58,31 @@ class DoublyLinkedlist{
         tail = nNode;
       }
     }
-};
+    void pop_front(){
+      Node* temp = head;
+      head = head->next;
+      if(head != NULL){
+        head->prev = NULL;
+      }
+      temp->next = NULL;
+      delete temp;
+
+    }
+    void pop_back(){
+      Node * temp = head;
+
+      while(temp->next->next != NULL){
+        temp= temp->next;
+      }
+      Node* todelete = temp->next;
+      tail = temp;
+      temp->next  = NULL;
+      delete todelete;
+
+    }
+
+
+  };
 
 
 int main(){
@@ -70,6 +94,10 @@ int main(){
     dll.push_back(4);
     dll.push_back(5);
     dll.push_back(6);
+    dll.print();
+    dll.pop_back();
+    dll.print();
+    dll.pop_front();
     dll.print();
 
 

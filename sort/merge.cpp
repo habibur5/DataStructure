@@ -5,14 +5,16 @@ void merge(vector<int> &v, int start, int mid, int end){
     vector<int>temp;
     int left = start, right= mid+1;
 
-    while(left<=mid && right<=end)
-    if(v[left]<= v[right]){
-        temp.push_back(v[left]);
-        left++;
-    }else{
-        temp.push_back(v[right]);
-        right++;
+    while(left<=mid && right<=end){
+        if(v[left] <= v[right]){
+            temp.push_back(v[left]);
+            left++;
+        }else{
+            temp.push_back(v[right]);
+            right++;
+        }
     }
+
     while(left<=mid){
         temp.push_back(v[left]);
         left++;

@@ -7,6 +7,7 @@ void merge(int l, int r, int mid){
     int L [l_sz+1];
     int r_sz  = r -mid; // r- (mid+1)+1
     int R[ r_sz+1];
+    
     for (int i = 0; i < l_sz; i++){
         L[i] = a[i+l];
     }

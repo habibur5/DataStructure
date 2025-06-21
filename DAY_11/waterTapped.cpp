@@ -3,7 +3,9 @@ using namespace std;
 /*
 * LeetCode 42. Trapping Rain Water
 * https://leetcode.com/problems/trapping-rain-water/ 
- */
+*/
+
+
 int trap (int *arr, int n){
     int leftMax[n];
     leftMax[0] = arr[0];
@@ -16,12 +18,14 @@ int trap (int *arr, int n){
     for(int i = n-2; i>=0; i--){
         rightMax[i] = max(rightMax[i+1], arr[i+1]);
     }
+
+
+
     int trapWater = 0;
     for(int i = 0; i<n; i++){
         int current =min(leftMax[i], rightMax[i])-arr[i];
         if(current>0) trapWater+=current;
     }
-
     return trapWater;
 
 }
