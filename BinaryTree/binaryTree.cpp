@@ -336,17 +336,90 @@ void kthLevel(Node* root, int level){
 }
 
 // lowest common ansistor
+// problem links:
+// leetcode 236, https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+// leetcode 1644, https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree-ii/
+// https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-tree/
 
-void LCA(Node* root){
+// time complexity: O(N), Space Complexity: O(N)
+// Approch 1
+// find path to node
+// Time Complexity: O(N), Space Complexity: O(N)
+bool rootToPath(Node* root, int n, vector<int>&path){
+  if(root == NULL) return false;
+  path.push_back(root->data);
+  if(root->data == n) return true;
+  int l = rootToPath(root->left, n, path);
+  int r = rootToPath(root->right, n, path);
+  if(l||r) return true;
+  path.pop_back();
+  return false;
+}
+int LCA1(Node* root,int n1, int n2){
+  vector<int> path1, path2;
+
+  rootToPath(root, n1, path1);
+  rootToPath(root, n2, path2);
+  int lca = -1;
+  for(int i =0, j=0; i<path1.size() && j<path2.size(); i++, j++){
+    if(path1[i] !=path2[j]) return lca;
+    lca = path1[i];
+  }
+
+  return lca;
+}
+
+// lowest Common ansistor
+// Approch 2
+// Time Complexity:O(N), Space Complexity: O(N)
+
+Node* LCA2(Node* root,int n1, int n2){
+  if(root==NULL) return NULL;
+  if(root->data == n1|| root->data == n2) return root;
+
+  Node* leftLCA = LCA2(root->left, n1, n2);
+  Node* rightLCA = LCA2(root->right, n1, n2);
+  if(leftLCA && rightLCA) return root;
+  return leftLCA ==NULL? rightLCA:leftLCA;
+
+}
+
+// Minimum distance between two nodes
+// problem links:
+// leetcode 236, https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+// https://www.geeksforgeeks.org/find-distance-between-two-nodes-of-a-binary-tree/
+// Time Complexity: O(N), Space Complexity: O(N)
+
+void rootToPath2(Node* root, int n, vector<int>&path){
+  if(root == NULL) return;
+  path.push_back(root->data);
+  if(root->data == n) return;
+  rootToPath2(root->left, n, path);
+  if(path.back() != n) path.pop_back();
+  if(path.back() != n) rootToPath2(root->right, n, path);
   
 }
+// find distance between two nodes
+// Time Complexity: O(N), Space Complexity: O(N)
+
+int findDistance(Node* root, int n1, int n2){
+  Node* lca = LCA2(root, n1, n2);
+  vector<int> path1, path2;
+  rootToPath2(lca, n1, path1);
+  rootToPath2(lca, n2, path2);
+  return path1.size() + path2.size() - 2; // -2 for lca node
+}
+
+
 
 int main(){
   vector<int> nodes = { 1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
   int idx = 0;
   Node* root = buildTree(nodes, idx);
-
-  rightSideView(root);
+  vector<int> path;
+  rootToPath2(root, 6, path);
+  cout<<"Path to 6: ";
+  for(int i: path) cout<<i<<" ";
 
   return 0;
 }
