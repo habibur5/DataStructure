@@ -399,6 +399,8 @@ void rootToPath2(Node* root, int n, vector<int>&path){
   if(path.back() != n) rootToPath2(root->right, n, path);
   
 }
+
+
 // find distance between two nodes
 // Time Complexity: O(N), Space Complexity: O(N)
 
@@ -408,6 +410,45 @@ int findDistance(Node* root, int n1, int n2){
   rootToPath2(lca, n1, path1);
   rootToPath2(lca, n2, path2);
   return path1.size() + path2.size() - 2; // -2 for lca node
+}
+
+
+// kth ancestor of a node
+// problem links:
+// leetcode 236, https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/
+// https://www.geeksforgeeks.org/kth-ancestor-node-binary-tree-set-1/
+
+
+int kthAncestor(Node* root, int node, int k){
+  if(root == NULL || k<0) return -1;
+  if(root->data == node) return 0;
+  int left = kthAncestor(root->left, node, k);
+  int right = kthAncestor(root->right, node, k);
+
+  if(left == -1 && right == -1) return -1;
+  int valid = left ==-1 ? right : left;
+  if(valid + 1 == k) {
+    cout<<root->data<<" ";
+  
+  }
+  return valid + 1;
+}
+
+// transform tree into sum  tree
+
+int transformtree(Node* root){
+  if(root==NULL) return 0;
+  
+  int leftOld =  transformtree(root->left);
+  int rightOld = transformtree(root->right);
+  int currentOld = root->data;
+
+  root->data = leftOld+ rightOld;
+
+  if(root->left != NULL) root->data += root->left->data;
+  if(root->right != NULL) root->data += root->right->data;
+
+  return currentOld;
 }
 
 
