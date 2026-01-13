@@ -6,8 +6,6 @@
     4. IMplicit Graphs
 */
 
-
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -50,7 +48,26 @@ class Graph{
 
       }
     }
-};
+
+    void bfs(){
+      vector<bool> visited(V, false);
+      queue<int> q;
+      int start = 0;
+      q.push(start);
+      visited[start] = true;
+      while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        cout<<node<<" ";
+        for(int nbr: l[node]){
+          if(!visited[nbr]){
+            q.push(nbr);
+            visited[nbr] = true;
+          }
+        }
+      } 
+    }
+  };
 
 int main(){
   Graph graph(5);
