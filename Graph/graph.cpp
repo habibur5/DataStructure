@@ -29,7 +29,7 @@ class Graph{
   public:
     Graph(int v){
       this->V = v;
-      l = new list<int> [v];
+      l = new list<int> [v]; // create 
     }
 
     void addEdge(int u, int v){
@@ -67,7 +67,7 @@ class Graph{
         }
       } 
     }
-  };
+};
 
 int main(){
   Graph graph(5);
